@@ -1,0 +1,6 @@
+config autossh
+	option ssh	'-y -i /etc/dropbear/id_rsa_ccc -N -T -R 0.0.0.0:6667:localhost:22 ccc@51.68.191.181 -p 443' 
+	option gatetime	'0'
+	option monitorport	'20000'
+	option poll	'600'
+	option enabled	'1'
