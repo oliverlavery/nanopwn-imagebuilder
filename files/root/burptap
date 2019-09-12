@@ -1,0 +1,24 @@
+#!/bin/sh
+
+BURP_PORT=8080
+IF1=br-lan
+
+function ipt_command {
+    ACTION=$1
+    SRC_IP=$2
+    if [ "$SRC_IP" != "" ]; then
+	SRC_IP="-s $SRC_IP"
+	echo $SRC_IP
+    fi
+    iptables -t nat $ACTION PREROUTING -i $IF1 -p tcp -m multiport $SRC_IP --dports 80,443 -j REDIRECT --to-ports $BURP_PORT
+    iptables $ACTION INPUT -i $IF1 -p tcp --dport $BURP_PORT -j ACCEPT
+}
+
+
+if [ "$1" == "start" ]; then
+	ipt_command -I $2
+fi
+if [ "$1" == "stop" ]; then
+        ipt_command -D $2
+fi
+

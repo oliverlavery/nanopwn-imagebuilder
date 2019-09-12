@@ -7,7 +7,7 @@
 		"glinet": "gl-crond kmod-GobiNet kmod-GobiSerial gl-s2s gl-portal -gl-core-api gl-cloud-ui gl-route-policy -gl-autoupkg gl-qos gl-tertf gl-fw gl-base-files gl-files-brower gl-firewall -gl-mem-monitor gl-modem gl-repeater gl-sdk gl-software gl-ui gl-util gl-wan-detect gl-wifi-core gl-monitor",
 		"glinet_vixmini": "gl-sdk gl-base-files gl-files-brower gl-firewall gl-repeater gl-software -gl-ui gl-ui-vixmini gl-util gl-wan-detect gl-wifi-core gl-monitor",
 		"basic_vixmini": "dnsmasq -wpad-mini iwinfo -kmod-nls-cp437 -kmod-nls-iso8859-1 -kmod-nls-utf8 kmod-nf-nathelper-extra luci luci-mod-rpc ethtool fcgi lighttpd lighttpd-mod-openssl lighttpd-mod-access lighttpd-mod-cgi lighttpd-mod-expire lighttpd-mod-fastcgi lighttpd-mod-proxy unzip wpa-cli wpad bridge ip-full mwan3",
-		"security": "tmux nmap-ssl ncat-ssl nping ndiff autossh wget curl aircrack-ng tcpdump snort nbtscan ettercap hcxdumptool hcxtools kismet-hak5 mdk3"
+		"security": "tmux nmap-ssl ncat-ssl nping ndiff autossh wget curl aircrack-ng tcpdump snort nbtscan ettercap hcxdumptool hcxtools kismet-hak5 mdk3 reaver nano vim fdisk e2fsprogs"
 	},
 	"profiles": {
 		"x1200": {
