@@ -14,11 +14,22 @@ function ipt_command {
     iptables $ACTION INPUT -i $IF1 -p tcp --dport $BURP_PORT -j ACCEPT
 }
 
+function usage {
+    echo Usage:
+    echo "   burptap <mode> <ip?>"
+    echo "   --------------------"
+    echo "mode = start | stop"
+    echo ip = target ip to redirect
+    echo
+    echo Packets from tcp 80 or 443 will be redirected to 8080.
+    echo Start a listener on this port or redirect it via ssh.
+}
 
 if [ "$1" == "start" ]; then
 	ipt_command -I $2
-fi
-if [ "$1" == "stop" ]; then
+elif [ "$1" == "stop" ]; then
         ipt_command -D $2
+else
+	usage
 fi
 
