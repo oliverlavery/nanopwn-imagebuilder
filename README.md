@@ -1,4 +1,28 @@
-# Imagebuilder #
+# Nanopwn Imagebuilder #
+
+This is a OpenWRT imagebuilder for glinet devices. Configurations for the ar300m and ar750s are provided with additional security tools. AutoSSH is installed and configured by default to redirect port 22 on the glinet device to a public IP.
+
+There's also a script in /root to do iptables redirection of HTTP/s traffic to a burp proxy via ssh. You'd typically use it like so:
+
+```
+ssh root@router -R 0.0.0.0:8080:localhost:8081 burptap start
+```
+
+Assuming you have a burp proxy listener configured for transparent proxying on localhost port 8081.
+
+## Building
+
+Binary packages are provided for various tools on ar71xx SoCs. Copy these to glinet/packages. You probably need to run gl_image once first to pull the glinet repos.
+
+Then build like so:
+
+```
+./gl_image -p ar300m -c customize.json
+```
+
+Enjoy!
+
+## GLInet Imagebuilder
 
 Imagebuilder for GL.iNet devices. The Imagebuilder (previously called the Image Generator) is a pre-compiled environment suitable for creating custom images without having to compile the entire OpenWRT build environment.
 
