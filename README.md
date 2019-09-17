@@ -1,14 +1,47 @@
-# Nanopwn Imagebuilder #
+# Nanopwn Imagebuilder
 
-This is a OpenWRT imagebuilder for glinet devices. Configurations for the ar300m and ar750s are provided with additional security tools. AutoSSH is installed and configured by default to redirect port 22 on the glinet device to a public IP.
+This is a security assessment focused OpenWRT imagebuilder for glinet devices. Configurations for the ar300m and ar750s are provided with additional security tools. AutoSSH is installed and configured by default to redirect port 22 on the glinet device to a public IP.
 
-There's also a script in /root to do iptables redirection of HTTP/s traffic to a burp proxy via ssh. You'd typically use it like so:
+## Burp Proxy Redirection
 
-```
+There's a script in /root to do iptables redirection of HTTP/s traffic to a burp proxy via ssh. You'd typically use it like so:
+
+```sh
 ssh root@router -R 0.0.0.0:8080:localhost:8081 burptap start
 ```
 
 Assuming you have a burp proxy listener configured for transparent proxying on localhost port 8081.
+
+tcpdump is also built in for wireshark remote capture.
+
+## rfkill Switch Function
+
+You can configure the physical switch to turn off the device WiFi like so:
+
+```sh
+/root/set-switch-rfkill
+```
+
+## Security Tools
+
+The following tools are built into the firmware:
+
+* OpenWRT packaged
+    * nmap-ssl
+    * ncat-ssl
+    * nping
+    * ndiff
+    * aircrack-ng
+    * tcpdump
+    * snort
+    * reaver
+* Custom packages in this repo
+    * nbtscan
+    * ettercap
+    * hcxdumptool
+    * hcxtools
+    * kismet-2019
+    * mdk3
 
 ## Building
 
@@ -16,7 +49,7 @@ Binary packages are provided for various tools on ar71xx SoCs. Copy these to gli
 
 Then build like so:
 
-```
+```sh
 ./gl_image -p ar300m -c customize.json
 ```
 
@@ -36,10 +69,10 @@ The companion https://github.com/gl-inet/glinet repository is downloaded automat
 git clone --depth=1 https://github.com/gl-inet/imagebuilder gl_imagebuilder
 ```
 
-## System requirements ##
+## System requirements
 
-- x86_64 platform
-- Ubuntu or another linux distro
+* x86_64 platform
+* Ubuntu or another linux distro
 
 Running Imagebuilder under Windows can be done using the Windows Subsystem For Linux (WSL) with Ubuntu installed to it. Follow the guide bellow, installing Ubuntu 18.04 LTS from the Microsoft Store:
 
