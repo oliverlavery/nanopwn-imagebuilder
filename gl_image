@@ -277,9 +277,6 @@ def main(argv):
         # check_call("git clone --single-branch -b %s --depth=1 %s %s" % (branch, url, dir_name), shell=True)
         check_call("git clone %s %s" % (gl_inet_ipks_url, dir_name), shell=True)
 
-    # XXX HACK to install packages in this repo --ol
-    check_call("cp packages/* glinet/ar71xx")
-
     c = Config(filename)
 
     if show:
@@ -289,6 +286,9 @@ def main(argv):
     if not ignore:
         print("Update glinet repository ......")
         check_call("git pull", shell=True, cwd=dir_name)
+
+    # XXX HACK to install packages in this repo --ol
+    check_call("cp ./packages/ar71xx/* ./glinet/ar71xx/", shell=True)
 
     # If WSL, Fix PATH variable (Required for building QSDK)
     if ('microsoft' in platform.uname()[3].lower()):

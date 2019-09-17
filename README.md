@@ -1,6 +1,6 @@
 # Nanopwn Imagebuilder
 
-This is a security assessment focused OpenWRT imagebuilder for glinet devices. Configurations for the ar300m and ar750s are provided with additional security tools. AutoSSH is installed and configured by default to redirect port 22 on the glinet device to a public IP.
+This is a security assessment focused OpenWRT imagebuilder for glinet devices. Configurations for the ar300m and ar750s are provided with additional security tools and features.
 
 ## Burp Proxy Redirection
 
@@ -22,6 +22,10 @@ You can configure the physical switch to turn off the device WiFi like so:
 /root/set-switch-rfkill
 ```
 
+## AutoSSH Command and Control
+
+AutoSSH is installed and configured. You will need to edit `/etc/config/autossh` to suit your setup.
+
 ## Security Tools
 
 The following tools are built into the firmware:
@@ -35,7 +39,7 @@ The following tools are built into the firmware:
     * tcpdump
     * snort
     * reaver
-* Custom packages in this repo
+* Custom ar71xx packages in this repo
     * nbtscan
     * ettercap
     * hcxdumptool
@@ -45,15 +49,15 @@ The following tools are built into the firmware:
 
 ## Building
 
-Binary packages are provided for various tools on ar71xx SoCs. Copy these to glinet/packages. You probably need to run gl_image once first to pull the glinet repos.
-
-Then build like so:
+Follow the original instructions below to setup your environment, then build like so:
 
 ```sh
-./gl_image -p ar300m -c customize.json
+./gl_image -p ar750s -c customize.json
 ```
 
 Enjoy!
+
+-------
 
 ## GLInet Imagebuilder
 
