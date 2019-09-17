@@ -94,7 +94,7 @@ class Config:
     def getImagebuilderPath(self, name):
         if self.data["profiles"][name].has_key("imagebuilder"):
             return self.data["profiles"][name]["imagebuilder"]
-    
+
     def getImagebuilderVersion(self, name):
         if self.data["profiles"][name].has_key("imagebuilder"):
             return self.data["profiles"][name]["imagebuilder"].split('/', 1)[0]
@@ -113,7 +113,7 @@ class Config:
         url = ""
         if self.data["profiles"][name].has_key("imagebuilder"):
             url = gl_inet_imagebuilder_url + self.data["profiles"][name]["imagebuilder"].split('/', 1)[1] + ".git"
-        
+
         if url:
             check_call("git clone %s %s" % (url, save_dir), shell=True)
 
@@ -277,6 +277,9 @@ def main(argv):
         # check_call("git clone --single-branch -b %s --depth=1 %s %s" % (branch, url, dir_name), shell=True)
         check_call("git clone %s %s" % (gl_inet_ipks_url, dir_name), shell=True)
 
+    # XXX HACK to install packages in this repo --ol
+    check_call("cp packages/* glinet/ar71xx")
+
     c = Config(filename)
 
     if show:
@@ -286,7 +289,7 @@ def main(argv):
     if not ignore:
         print("Update glinet repository ......")
         check_call("git pull", shell=True, cwd=dir_name)
-        
+
     # If WSL, Fix PATH variable (Required for building QSDK)
     if ('microsoft' in platform.uname()[3].lower()):
         print('WSL detected, fixed PATH')
@@ -314,7 +317,7 @@ def main(argv):
         im_save_dir = "imagebuilder/" + c.getImagebuilderVersion(image)
         if not os.path.isdir(im_save_dir):
             check_call("mkdir -p %s" % im_save_dir, shell=True)
-    
+
         # Search imagebuilder path
         im_path = os.getcwd() + "/imagebuilder/" + c.getImagebuilderPath(image)
         if not os.path.isdir(im_path):
@@ -325,7 +328,7 @@ def main(argv):
 
         # clean binary file
         check_call("rm -rf bin/*", shell=True, cwd=im_path)
-        
+
         # Make index for glinet
         os.environ["TOPDIR"] = im_path
         try:
@@ -401,7 +404,7 @@ def main(argv):
                     check_call("find single_img_dir/ -maxdepth 1 -name *.img | xargs cp -t %s/" \
                             % (bin_dir), shell=True, cwd=im_path)
                     # return_code, output = commands.getstatusoutput("basename %s" % output)
-                
+
                 print"------------------------------------------------------------------------"
                 print("Copy " + output + " to " + fw_name)
 
