@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Set the physical switch on the device to enable/disable WiFi
+
+uci set glconfig.switch_button=service
+uci set glconfig.switch_button.enable=1
+uci set glconfig.switch_button.function=rfkill
+uci commit
