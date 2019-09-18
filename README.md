@@ -2,7 +2,7 @@
 
 This is a security assessment focused OpenWRT imagebuilder for glinet devices. Configurations for the ar300m and ar750s are provided with additional security tools and features.
 
-* Please remember to update /files/dropbear/authorized_keys for your own SSH keys! *
+** Please remember to update /files/dropbear/authorized_keys for your own SSH keys! **
 
 ## Burp Proxy Redirection
 
